@@ -1,0 +1,28 @@
+with "gtkada";
+
+project Snake is
+
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Main use ("main.adb");
+   type Build_Kind is
+      ("static-pic", "static", "relocatable");
+   Library_Type : Build_Kind := external ("LIBRARY_TYPE");
+
+   package Compiler is
+
+      case Library_Type is
+
+         when "static-pic" =>
+            for Switches ("ada") use ("-gnatwa.n", "-gnatyy", "-gnatVa", "-gnato", "-gnata", "-gnatf");
+
+         when "static" =>
+            for Switches ("ada") use ("-gnatwa.n", "-gnatyy", "-gnatVa", "-gnato", "-gnata", "-gnatf");
+
+         when "relocatable" =>
+            for Switches ("ada") use ("-gnatwa.n", "-gnatyy", "-gnatVa", "-gnato", "-gnata", "-gnatf");
+      end case;
+   end Compiler;
+
+end Snake;
+
